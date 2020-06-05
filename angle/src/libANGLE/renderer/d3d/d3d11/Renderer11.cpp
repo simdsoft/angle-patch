@@ -907,7 +907,7 @@ egl::Error Renderer11::initializeD3DDevice()
                     result = callD3D11CreateDevice(D3D11CreateDevice, false);
                 }
 				
-				// x-studio spec, fallback to software render driver and try again
+                // x-studio spec, fallback to software render driver and try again
                 if (result == DXGI_ERROR_UNSUPPORTED)
                 { 
                     mRequestedDriverType = D3D_DRIVER_TYPE_WARP;
