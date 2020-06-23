@@ -442,22 +442,7 @@ config("delayloads_not_for_child_dll") {
 # See https://msdn.microsoft.com/en-us/library/2kzt1wy3.aspx for a reference of
 # what each value does.
 config("default_crt") {
-  if (is_component_build) {
-    # Component mode: dynamic CRT. Since the library is shared, it requires
-    # exceptions or will give errors about things not matching, so keep
-    # exceptions on.
-    configs = [ ":dynamic_crt" ]
-  } else {
-    if (current_os == "winuwp") {
-      # https://blogs.msdn.microsoft.com/vcblog/2014/06/10/the-great-c-runtime-crt-refactoring/
-      # contains a details explanation of what is happening with the Windows
-      # CRT in Visual Studio releases related to Windows store applications.
-      configs = [ ":dynamic_crt" ]
-    } else {
-      # Desktop Windows: static CRT.
-      configs = [ ":static_crt" ]
-    }
-  }
+  configs = [ ":dynamic_crt" ]
 }
 
 # Use this to force use of the release CRT when building perf-critical build
@@ -468,7 +453,7 @@ config("release_crt") {
   if (is_component_build) {
     cflags = [ "/MD" ]
   } else {
-    cflags = [ "/MD" ]
+    cflags = [ "/MT" ]
   }
 }
 
@@ -486,7 +471,7 @@ config("static_crt") {
     # This pulls in the static debug CRT and defines _DEBUG
     cflags = [ "/MTd" ]
   } else {
-    cflags = [ "/MD" ]
+    cflags = [ "/MT" ]
   }
 }
 
