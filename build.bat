@@ -11,6 +11,10 @@ rem --- 2. dynamic crt MD (angle\build\config\win\BUILD.gn)
 pushd angle
 rem git pull
 rem gclient sync -D
+
+rem This tells depot_tools to use your locally installed version of Visual Studio (by default, depot_tools will try to use a google-internal version).
+set DEPOT_TOOLS_WIN_TOOLCHAIN=0
+
 call gn gen out/release --sln=angle-release --ide=vs2019 "--args=is_debug=false is_clang=false target_cpu=\"x86\" treat_warnings_as_errors=false angle_enable_vulkan=false angle_enable_gl=false"
 call devenv out\release\angle-release.sln /rebuild "GN|Win32" /Project libEGL
 popd
