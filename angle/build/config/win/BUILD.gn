@@ -41,6 +41,8 @@ declare_args() {
   #  and with this switch, clang emits it like this:
   #    foo/bar.cc:12:34: error: something went wrong
   use_clang_diagnostics_format = false
+
+  use_msvcr14x = false
 }
 
 # This is included by reference in the //build/config/compiler config that
