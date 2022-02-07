@@ -57,7 +57,7 @@ https://github.com/google/angle
   #    endif
   #endif
   ```
-- Fallback to Software render
+- Fallback to software render
   ```cpp
   if (result == E_INVALIDARG && mAvailableFeatureLevels.size() > 1u &&
                 mAvailableFeatureLevels[0] == D3D_FEATURE_LEVEL_11_1)
