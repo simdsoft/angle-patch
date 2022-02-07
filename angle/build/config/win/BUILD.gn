@@ -288,10 +288,12 @@ config("sdk_link") {
     ldflags = [ "/MACHINE:X64" ]
   } else if (current_cpu == "x86") {
     ldflags = [
-      "/MACHINE:X86",
-      "/SAFESEH",  # Not compatible with x64 so use only for x86.
-      "/largeaddressaware",
+        "/MACHINE:X86",
+        "/largeaddressaware",
     ]
+    if (!is_debug) {
+        ldflags += [ "/SAFESEH" ] # Not compatible with x64 so use only for x86.
+    }
   } else if (current_cpu == "arm") {
     ldflags = [ "/MACHINE:ARM" ]
   } else if (current_cpu == "arm64") {
@@ -315,10 +317,30 @@ config("sdk_link") {
   }
   vc_lib_um_path = vcvars_toolchain_data.vc_lib_um_path
 
-  lib_dirs = [
-    "$vc_lib_um_path",
-    "$vc_lib_path",
-  ]
+  if (use_msvcr14x) {
+    msvcr14x_lib_dir = getenv("msvcr14x_ROOT")
+    assert(msvcr14x_lib_dir != "")
+    if (current_cpu == "x64") {
+      msvcr14x_lib_dir = "$msvcr14x_lib_dir\\x64"
+    }
+    lib_dirs = [
+      "$msvcr14x_lib_dir\\Release",
+      "$msvcr14x_lib_dir\\Debug",
+      "$msvcr14x_lib_dir\\AnsiRelease",
+      "$msvcr14x_lib_dir\\AnsiDebug",
+      "$vc_lib_um_path",
+      "$vc_lib_path",
+    ]
+    print("Linking with msvcr14x vc libs...")
+  }
+  else {
+    lib_dirs = [
+      "$vc_lib_um_path",
+      "$vc_lib_path",
+    ]
+    print("Linking with builtin vc libs...")
+  }
+
   if (defined(vc_lib_atlmfc_path)) {
     lib_dirs += [ "$vc_lib_atlmfc_path" ]
   }

@@ -13,7 +13,7 @@ rem gclient sync -D
 
 rem This tells depot_tools to use your locally installed version of Visual Studio (by default, depot_tools will try to use a google-internal version).
 set DEPOT_TOOLS_WIN_TOOLCHAIN=0
-call gn gen out/debug --sln=angle-debug --ide=vs2022 "--args=is_debug=true is_clang=false target_cpu=\"x86\" treat_warnings_as_errors=false angle_enable_vulkan=false angle_enable_gl=false"
-call devenv out\debug\angle-debug.sln /rebuild "GN|Win32" /Project libEGL
+call gn gen out/debug --sln=angle-debug --ide=vs2022 "--args=is_debug=true enable_iterator_debugging=true is_clang=false target_cpu=\"x86\" treat_warnings_as_errors=false angle_enable_vulkan=false angle_enable_gl=false use_msvcr14x=false"
+call devenv out\debug\angle-debug.sln /build "GN|Win32" /Project libEGL
 popd
 
