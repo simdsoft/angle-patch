@@ -43,6 +43,8 @@ declare_args() {
   use_clang_diagnostics_format = false
 
   use_msvcr14x = false
+  
+  angle_enable_d3d11_wrap_fallback = false
 }
 
 # This is included by reference in the //build/config/compiler config that
@@ -257,6 +259,11 @@ config("runtime_library") {
     # When not targeting Windows Runtime, make sure the WINAPI family is set
     # to desktop.
     defines += [ "WINAPI_FAMILY=WINAPI_FAMILY_DESKTOP_APP" ]
+  }
+  
+  if (angle_enable_d3d11_wrap_fallback) {
+    print("Compiling with software renderer fallback support...")
+    defines += [ "ANGLE_ENABLE_D3D11_WRAP_FALLBACK=1" ]
   }
 }
 
