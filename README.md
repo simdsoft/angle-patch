@@ -2,6 +2,22 @@
 
 ## build step
 ### windows
+
+#### pitfall
+
+- winsdks downloads:
+  - latest: https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/
+  - revisions: https://developer.microsoft.com/en-us/windows/downloads/sdk-archive/
+- the windows sdks ver must match at follow files
+  - build/toolchain/win/setup_toolchain.py
+  - build/config/win/BUILD.gn
+
+- winsdkvers:
+  - 10.0.19041.0: `NTDDI_WIN10_VB`
+  - 10.0.20348.0: `NTDDI_WIN10_FE`
+  - 10.0.22000.0: `NTDDI_WIN10_CO`
+  - 10.0.22621.0: `NTDDI_WIN10_NI`
+
 1. Add **depot_tools** to PATH
 2. IMPORTANT: Set **DEPOT_TOOLS_WIN_TOOLCHAIN=0** in your environment if you are not a Googler.
 3. Ensure your system only contains vc142 toolset, multi toolset will cause gn error: Can't find User32.lib
@@ -83,3 +99,4 @@ https://github.com/google/angle
       result               = callD3D11CreateDevice(D3D11CreateDevice, false);
   }
   ```
+  
