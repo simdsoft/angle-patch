@@ -16,6 +16,6 @@ set DEPOT_TOOLS_WIN_TOOLCHAIN=0
 
 call gn gen out/release --sln=angle-release --ide=vs2022 "--args=is_debug=false is_clang=false target_cpu=\"x64\" treat_warnings_as_errors=false angle_enable_vulkan=false angle_enable_gl=false use_msvcr14x=false"
 REM call devenv out\release\angle-release.sln /build "GN|Win32" /Project libEGL
-autoninja -C out\release libEGL
+call autoninja -C out\release libEGL
 popd
 
