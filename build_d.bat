@@ -1,5 +1,6 @@
 :: ----------- default is angle default optimize flags is /O1 on windows
 @echo off
+chcp 65001
 rem ---------- setup env
 set programdir=%ProgramFiles%
 
