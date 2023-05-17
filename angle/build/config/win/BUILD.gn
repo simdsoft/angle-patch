@@ -43,7 +43,7 @@ declare_args() {
   use_clang_diagnostics_format = false
 
   # Indicates whether to use /pdbpagesize:8192 to allow PDBs larger than 4 GiB.
-  use_large_pdbs = false
+  use_large_pdbs = true
 
   use_msvcr14x = false
   
